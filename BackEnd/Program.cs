@@ -70,6 +70,12 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
 builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
 
+// Configure Dependency Injection for Posts
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IPostQueryService, PostQueryService>();
+builder.Services.AddScoped<IPostCommandService, PostCommandService>();
+
 // Configure Dependency Injection for UserProfile
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
