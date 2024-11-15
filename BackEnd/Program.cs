@@ -10,7 +10,6 @@ using BackEnd.Dishes;
 using BackEnd.Dishes.Application.Internal.CommandServices; // Asegúrate de tener las referencias correctas
 using BackEnd.Dishes.Application.Internal.QueryServices;
 using BackEnd.Dishes.Domain.Services;
-using BackEnd.Shared.Domain.Repositories;
 using BackEnd.Shared.Infrastructure;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -23,6 +22,11 @@ using BackEnd.Posts.Application.Internal.QueryServices;
 using BackEnd.Posts.Domain.Repositories;
 using BackEnd.Posts.Domain.Services;
 using BackEnd.Posts.Infrastructure.Repositories;
+using BackEnd.Chefs.Application.Internal.CommandServices; // Agregado
+using BackEnd.Chefs.Application.Internal.QueryServices;   // Agregado
+using BackEnd.Chefs.Domain.Repositories;                  // Agregado
+using BackEnd.Chefs.Domain.Services;                     // Agregado
+using BackEnd.Chefs.Infrastructure.Repositories;           // Agregado
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,7 +64,7 @@ else if (builder.Environment.IsProduction())
     });
 }
 
-// Configure Dependency Injection
+// Configure Dependency Injection for Orders
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
@@ -77,6 +81,11 @@ builder.Services.AddScoped<IDishRepository, DishRepository>(); // Asegúrate de 
 builder.Services.AddScoped<IDishQueryService, DishQueryService>();
 builder.Services.AddScoped<IDishCommandService, DishCommandService>();
 
+// Configure Dependency Injection for Chefs (Agregado)
+builder.Services.AddScoped<IChefRepository, ChefRepository>();
+builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
+builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
+
 /////////////////////////End Database Configuration/////////////////////////
 var app = builder.Build();
 
@@ -90,14 +99,24 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
+
+/*
+// Configuración de Swagger solo en desarrollo
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+*/
+
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rampart API V1");
-        c.RoutePrefix = string.Empty; // Esto hace que Swagger esté disponible en la raíz
-    });
+        c.RoutePrefix = string.Empty; // Esto hace que Swagger esté disponible en la raíz
+    });
 }
 
 app.UseHttpsRedirection();

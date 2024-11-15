@@ -1,9 +1,9 @@
 ﻿using BackEnd.Orders.Domain.Model.Aggregates;
 using BackEnd.UserProfile;
 using BackEnd.Dishes;
+using BackEnd.Chefs.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
-using BackEnd.Posts;
 using BackEnd.Posts.Domain.Model.Aggregates;
 
 namespace BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -38,6 +38,15 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Order>().Property(o => o.totalAmount).IsRequired().HasColumnName("total_amount");
         builder.Entity<Order>().Property(o => o.status).IsRequired().HasColumnName("status");
         builder.Entity<Order>().Property(o => o.detailsShown).IsRequired().HasColumnName("details_shown");
+        
+        // Configuración para Chef
+        builder.Entity<Chef>().ToTable("chefs"); // Especifica el nombre de la tabla
+        builder.Entity<Chef>().HasKey(c => c.Id); // Define la clave primaria
+        builder.Entity<Chef>().Property(c => c.Id).IsRequired(); // La propiedad Id es obligatoria
+        builder.Entity<Chef>().Property(c => c.Name).HasColumnName("name").IsRequired(); // La propiedad Name es obligatoria
+        builder.Entity<Chef>().Property(c => c.Rating).HasColumnName("rating").IsRequired(); // La propiedad Rating es obligatoria
+        builder.Entity<Chef>().Property(c => c.Favorite).HasColumnName("favorite").IsRequired(); // La propiedad Favorite es obligatoria
+        builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender").IsRequired(); // La propiedad Gender es obligatoria
 
         // Configurar PreferencesJson como la columna que almacenará los datos JSON de dishes
         builder.Entity<Order>()
@@ -108,6 +117,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     }
     
     // Agregar DbSet para las entidades
+    public DbSet<Chef> Chefs { get; set; } // DbSet para Chef
     public DbSet<ProfileData> UserProfiles { get; set; }
     public DbSet<DishData> Dishes { get; set; } // Agrega el DbSet para DishData
     public DbSet<Order> Orders { get; set; }
