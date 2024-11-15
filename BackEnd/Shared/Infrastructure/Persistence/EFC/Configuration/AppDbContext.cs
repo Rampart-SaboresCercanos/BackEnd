@@ -22,7 +22,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.UseSnakeCaseNamingConvention();
         
         // Configuración para Post
-        builder.Entity<Post>().ToTable("post");
+        builder.Entity<Post>().ToTable("posts");
         builder.Entity<Post>().HasKey(up => up.id);
         builder.Entity<Post>().Property(up => up.dishId).IsRequired().HasColumnName("dishId");
         builder.Entity<Post>().Property(up => up.publishDate).IsRequired().HasColumnName("publishDate");
