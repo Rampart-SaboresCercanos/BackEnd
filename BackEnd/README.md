@@ -44,6 +44,14 @@ CREATE TABLE dishes (
     preparation_steps_json TEXT NOT NULL,
     favorite BOOLEAN NOT NULL
 );
+
+CREATE TABLE chefs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    rating DOUBLE NOT NULL,
+    favorite BOOLEAN NOT NULL,
+    gender VARCHAR(10) NOT NULL
+);
 ```
 
 ## Configuración de Conexión a la Base de Datos
