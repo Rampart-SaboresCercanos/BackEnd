@@ -3,7 +3,8 @@
 public record UpdatePostCommand(
     int? dishId = null,
     DateTime? publishDate = null,
-    int? stock = null)
+    int? stock = null,
+    float? price = null)
 {
     internal int PostId { get; init; }
 };

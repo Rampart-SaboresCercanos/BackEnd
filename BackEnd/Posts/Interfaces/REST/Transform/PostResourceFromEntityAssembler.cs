@@ -12,6 +12,7 @@ public static class PostResourceFromEntityAssembler
             entity.id,
             entity.dishId,
             entity.publishDate,
-            entity.stock);
+            entity.stock,
+            entity.pricePerUnit);
     }
 }

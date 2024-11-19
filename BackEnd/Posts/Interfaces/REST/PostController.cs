@@ -22,7 +22,7 @@ public class PostController(
     [HttpPost]
     [SwaggerOperation(
         Summary = "Create a Post",
-        Description = "Create a post by providing a Dish, a Date and a Stock number",
+        Description = "Create a post by providing a Dish, a Date, a Stock number and a Price per Unit",
         OperationId = "CreatePost")]
     [SwaggerResponse(201, "The post was created", typeof(Post))]
     [SwaggerResponse(400, "The post was not created")]

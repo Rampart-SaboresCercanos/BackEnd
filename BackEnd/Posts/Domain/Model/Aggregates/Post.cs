@@ -9,6 +9,7 @@ public class Post
     public int dishId { get; set; }
     public DateTime publishDate { get; set; }
     public int stock { get; set; }
+    public float pricePerUnit { get; set; }
     
     protected Post() { }
 

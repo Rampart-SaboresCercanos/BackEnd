@@ -3,5 +3,6 @@
 public record CreatePostResource(
     int dishId,
     DateTime publishDate,
-    int stock
+    int stock,
+    float pricePerUnit
     );

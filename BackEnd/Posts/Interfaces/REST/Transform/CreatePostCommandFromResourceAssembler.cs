@@ -7,6 +7,6 @@ public class CreatePostCommandFromResourceAssembler
 {
     public static CreatePostCommand ToCommandFromResource(CreatePostResource resource)
     {
-        return new CreatePostCommand(resource.dishId, resource.publishDate, resource.stock);
+        return new CreatePostCommand(resource.dishId, resource.publishDate, resource.stock, resource.pricePerUnit);
     }
 }
