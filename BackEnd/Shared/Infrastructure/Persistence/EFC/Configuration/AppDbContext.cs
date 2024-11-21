@@ -29,6 +29,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Post>().Property(up => up.dishId).IsRequired().HasColumnName("dishId");
         builder.Entity<Post>().Property(up => up.publishDate).IsRequired().HasColumnName("publishDate");
         builder.Entity<Post>().Property(up => up.stock).IsRequired().HasColumnName("stock");
+        builder.Entity<Post>().Property(up => up.pricePerUnit).IsRequired().HasColumnName("pricePerUnit");
 
         // Configuración para Order
         builder.Entity<Order>().ToTable("order"); // Especifica el nombre de la tabla
