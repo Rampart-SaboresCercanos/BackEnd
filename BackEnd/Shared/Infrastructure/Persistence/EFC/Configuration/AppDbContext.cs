@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using BackEnd.Chefs.Domain.Model.Aggregates;
 using BackEnd.Orders.Domain.Model.Aggregates;
 using BackEnd.UserProfile;
 //using BackEnd.Chefs.Domain.Model.Aggregates;
@@ -38,22 +39,23 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Order>().Property(o => o.status).IsRequired().HasColumnName("status");
 
         // Configuración para Chef
-        //builder.Entity<Chef>().ToTable("chefs"); // Especifica el nombre de la tabla
-        //builder.Entity<Chef>().HasKey(c => c.Id); // Define la clave primaria
-        //builder.Entity<Chef>().Property(c => c.Id).IsRequired(); // La propiedad Id es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Name).HasColumnName("name")
-        //    .IsRequired(); // La propiedad Name es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Rating).HasColumnName("rating")
-        //    .IsRequired(); // La propiedad Rating es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Favorite).HasColumnName("favorite")
-        //    .IsRequired(); // La propiedad Favorite es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender")
-        //    .IsRequired(); // La propiedad Gender es obligatoria
+        builder.Entity<Chef>().ToTable("chefs"); // Especifica el nombre de la tabla
+        builder.Entity<Chef>().HasKey(c => c.Id); // Define la clave primaria
+        builder.Entity<Chef>().Property(c => c.Id).IsRequired(); // La propiedad Id es obligatoria
+
+// Configura las columnas con sus tipos y restricciones
+        builder.Entity<Chef>().Property(c => c.Name).HasColumnName("name")
+            .IsRequired()
+            .HasMaxLength(255); // Asegura que no se exceda el tamaño de un VARCHAR(255)
+        builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender")
+            .IsRequired()
+            .HasMaxLength(50); // Para mantener un tamaño razonable en la columna
+        builder.Entity<Chef>().Property(c => c.Rating).HasColumnName("rating")
+            .IsRequired();
+        builder.Entity<Chef>().Property(c => c.IsFavorite).HasColumnName("favorite")
+            .IsRequired(); // La propiedad Favorite es obligatoria (tipo booleano o tinyint(1))
 
         
-
-        
-
         // Configuración para UserProfile
         builder.Entity<ProfileData>().ToTable("user_profiles"); // Especifica el nombre de la tabla
         builder.Entity<ProfileData>().HasKey(up => up.Id);

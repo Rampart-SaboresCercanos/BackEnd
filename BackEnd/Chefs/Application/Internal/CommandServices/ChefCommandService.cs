@@ -6,7 +6,8 @@ using BackEnd.Shared.Domain.Repositories;
 
 namespace BackEnd.Chefs.Application.Internal.CommandServices;
 
-public class ChefCommandService(IChefRepository chefRepository, IUnitOfWork unitOfWork) : IChefCommandService
+public class ChefCommandService(IChefRepository chefRepository, IUnitOfWork unitOfWork) 
+    : IChefCommandService
 {
     public async Task<Chef?> Handle(CreateChefCommand command)
     {
@@ -15,61 +16,44 @@ public class ChefCommandService(IChefRepository chefRepository, IUnitOfWork unit
         {
             await chefRepository.AddAsync(chef);
             await unitOfWork.CompleteAsync();
+            return chef;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-
-        return chef;
     }
 
     public async Task<Chef?> Handle(UpdateChefCommand command)
     {
-        var chef = await chefRepository.FindByIdAsync(command.ChefId);
+        var chef = await chefRepository.FindByIdAsync(command.Id);
         if (chef == null)
         {
             throw new Exception("Chef not found");
         }
 
-        if (command.Name != null)
-        {
-            chef.Name = command.Name;
-        }
-
-        if (command.Gender != null)
-        {
-            chef.Gender = command.Gender;
-        }
-
-        if (command.Rating.HasValue)
-        {
-            chef.Rating = command.Rating.Value;
-        }
-
-        if (command.Favorite.HasValue)
-        {
-            chef.Favorite = command.Favorite.Value;
-        }
-
+        chef.Name = command.Name;
+        chef.Gender = command.Gender;
+        chef.Rating = command.Rating;
+        chef.IsFavorite = command.IsFavorite;
+        
         try
         {
-            await chefRepository.UpdateAsync(chef);
+            chefRepository.Update(chef);
             await unitOfWork.CompleteAsync();
+            return chef;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-
-        return chef;
     }
 
-    public async Task<Chef?> Handle(DeleteChefCommand command)
+    public async Task<bool> DeleteChefCommand(int id)
     {
-        var chef = await chefRepository.FindByIdAsync(command.ChefId);
+        var chef = await chefRepository.FindByIdAsync(id);
         if (chef == null)
         {
             throw new Exception("Chef not found");
@@ -77,15 +61,14 @@ public class ChefCommandService(IChefRepository chefRepository, IUnitOfWork unit
 
         try
         {
-            await chefRepository.RemoveAsync(chef);
+            chefRepository.Remove(chef);
             await unitOfWork.CompleteAsync();
+            return true;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-
-        return chef;
     }
 }

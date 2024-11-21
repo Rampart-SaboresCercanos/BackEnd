@@ -1,4 +1,9 @@
-﻿using BackEnd.Orders.Application.Internal.CommandServices;
+﻿using BackEnd.Chefs.Application.Internal.CommandServices;
+using BackEnd.Chefs.Application.Internal.QueryServices;
+using BackEnd.Chefs.Domain.Repositories;
+using BackEnd.Chefs.Domain.Services;
+using BackEnd.Chefs.Infrastructure.Repositories;
+using BackEnd.Orders.Application.Internal.CommandServices;
 using BackEnd.Orders.Application.Internal.QueryServices;
 using BackEnd.Orders.Domain.Repositories;
 using BackEnd.Orders.Domain.Services;
@@ -102,9 +107,9 @@ builder.Services.AddScoped<IDishQueryService, DishQueryService>();
 builder.Services.AddScoped<IDishCommandService, DishCommandService>();
 
 // Chef Bounded Context
-//builder.Services.AddScoped<IChefRepository, ChefRepository>();
-//builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
-//builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
+builder.Services.AddScoped<IChefRepository, ChefRepository>();
+builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
+builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
 
 // Post Bounded Context
 builder.Services.AddScoped<IPostRepository, PostRepository>();

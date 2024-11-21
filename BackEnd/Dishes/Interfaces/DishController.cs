@@ -78,7 +78,6 @@ public class DishController(IDishQueryService dishQueryService,
     [HttpDelete("{dishId:int}")]
     public async Task<IActionResult> DeleteDish(int dishId)
     {
-        var deleteDishCommand = new DeleteDishCommand(dishId);
         var result = await dishCommandService.DeleteDishCommand(dishId);
         if (!result)
         {

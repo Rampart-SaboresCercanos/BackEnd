@@ -3,11 +3,12 @@ using BackEnd.Chefs.Interfaces.REST.Resource;
 
 namespace BackEnd.Chefs.Interfaces.REST.Transform;
 
-public class CreateChefCommandFromResourceAssembler
+public class UpdateChefCommandFromResourceAssembler
 {
-    public static CreateChefCommand ToCommandFromResource(CreateChefResource resource)
+    public static UpdateChefCommand ToCommandFromResource(int id, UpdateChefResource resource)
     {
-        return new CreateChefCommand(
+        return new UpdateChefCommand(
+            id,
             resource.Name,
             resource.Gender,
             resource.Rating,

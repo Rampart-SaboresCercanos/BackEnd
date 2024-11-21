@@ -8,14 +8,9 @@ namespace BackEnd.Chefs.Infrastructure.Repositories;
 
 public class ChefRepository(AppDbContext context) : BaseRepository<Chef>(context), IChefRepository
 {
-    public async Task<IEnumerable<Chef>> FindAllAsync()
+    public async Task<IEnumerable<Chef>> FindByIdAsync(int id)
     {
-        return await Context.Set<Chef>().ToListAsync();
-    }
-
-    public async Task<Chef?> FindByIdAsync(int chefId)
-    {
-        return await Context.Set<Chef>().FirstOrDefaultAsync(c => c.Id == chefId);
+        return await Context.Set<Chef>().Where(d => d.Id == id).ToListAsync();
     }
     
     public async Task<IEnumerable<Chef>> FindByNameAsync(string name)
@@ -30,17 +25,5 @@ public class ChefRepository(AppDbContext context) : BaseRepository<Chef>(context
         return await Context.Set<Chef>()
             .Where(c => c.Rating >= rating)  // Ejemplo de búsqueda por rating
             .ToListAsync();
-    }
-
-    public async Task UpdateAsync(Chef chef)
-    {
-        Context.Set<Chef>().Update(chef);
-        await Context.SaveChangesAsync();
-    }
-
-    public async Task RemoveAsync(Chef chef)
-    {
-        Context.Set<Chef>().Remove(chef);
-        await Context.SaveChangesAsync();
     }
 }
