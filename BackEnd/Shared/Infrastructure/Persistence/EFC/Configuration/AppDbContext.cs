@@ -8,6 +8,8 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using BackEnd.Posts.Domain.Model.Aggregates;
 
+using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
 namespace BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -95,7 +97,6 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Dish>().Property(f=> f.UpdatedDate).IsRequired();
         
         // IAM Context
-
         builder.Entity<User>().HasKey(u => u.Id);
         builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(u => u.Username).IsRequired();

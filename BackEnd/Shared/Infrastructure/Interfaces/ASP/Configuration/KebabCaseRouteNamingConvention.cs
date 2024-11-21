@@ -1,17 +1,9 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-
-namespace BackEnd.Shared.Infrastructure;
+using BackEnd.Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions;
+namespace BackEnd.Shared.Infrastructure.Interfaces.ASP.Configuration;
 
 public class KebabCaseRouteNamingConvention : IControllerModelConvention
 {
-    private static AttributeRouteModel? ReplaceControllerTemplate(SelectorModel selector, string name)
-    {
-        return selector.AttributeRouteModel != null ? new AttributeRouteModel
-        {
-            Template = selector.AttributeRouteModel.Template?.Replace("[controller]", name.ToKebabCase())
-        } : null;
-    }
-    
     public void Apply(ControllerModel controller)
     {
         foreach (var selector in controller.Selectors)
@@ -23,5 +15,16 @@ public class KebabCaseRouteNamingConvention : IControllerModelConvention
         {
             selector.AttributeRouteModel = ReplaceControllerTemplate(selector, controller.ControllerName);
         }
+    }
+
+    private static AttributeRouteModel? ReplaceControllerTemplate(SelectorModel selector, string name)
+    {
+        return selector.AttributeRouteModel != null
+            ? new AttributeRouteModel
+            {
+                Template = selector.AttributeRouteModel.Template?.Replace(
+                    "[controller]", name.ToKebabCase())
+            }
+            : null;
     }
 }

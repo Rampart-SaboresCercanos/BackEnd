@@ -7,12 +7,10 @@ namespace BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
 public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
 {
     protected readonly AppDbContext Context;
-
     protected BaseRepository(AppDbContext context)
     {
         Context = context;
     }
-    
     public async Task AddAsync(TEntity entity)
     {
         await Context.Set<TEntity>().AddAsync(entity);
@@ -25,7 +23,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     public void Remove(TEntity entity)
     {
-        Context.Set<TEntity>().Remove(entity);
+        Context.Set<TEntity>().Remove(entity); 
     }
 
     public async Task<TEntity?> FindByIdAsync(int id)

@@ -1,11 +1,15 @@
-﻿using BackEnd.Orders.Application.Internal.CommandServices;
+﻿using BackEnd.Chefs.Application.Internal.CommandServices;
+using BackEnd.Chefs.Application.Internal.QueryServices;
+using BackEnd.Chefs.Domain.Repositories;
+using BackEnd.Chefs.Domain.Services;
+using BackEnd.Chefs.Infrastructure.Repositories;
+using BackEnd.Orders.Application.Internal.CommandServices;
 using BackEnd.Orders.Application.Internal.QueryServices;
 using BackEnd.Orders.Domain.Repositories;
 using BackEnd.Orders.Domain.Services;
 using BackEnd.Shared.Domain.Repositories;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
-using BackEnd.Shared.Infrastructure;
 using BackEnd.UserProfile;
 using BackEnd.UserProfile.Application.Internal.QueryServices;
 using BackEnd.UserProfile.Application.Internal.CommandServices;
@@ -28,10 +32,12 @@ using BackEnd.IAM.Domain.Repositories;
 using BackEnd.IAM.Domain.Services;
 using BackEnd.IAM.Infrastructure.Hashing.BCrypt.Services;
 using BackEnd.IAM.Infrastructure.Persistence.EFC.Repositories;
+using BackEnd.IAM.Infrastructure.Pipeline.Middleware.Extensions;
 using BackEnd.IAM.Infrastructure.Tokens.JWT.Configuration;
 using BackEnd.IAM.Infrastructure.Tokens.JWT.Services;
 using BackEnd.IAM.Interfaces.ACL;
-using BackEnd.Orders.Infrastructure.Persistence.EFC.Repositories; // Agregado
+using BackEnd.Orders.Infrastructure.Persistence.EFC.Repositories;
+using BackEnd.Shared.Infrastructure.Interfaces.ASP.Configuration; // Agregado
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -124,8 +130,6 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.EnableAnnotations();
 });
-       
-
 
 // Configure Dependency Injection
 // Bounded Context Injection Configuration for Business
@@ -147,9 +151,9 @@ builder.Services.AddScoped<IDishQueryService, DishQueryService>();
 builder.Services.AddScoped<IDishCommandService, DishCommandService>();
 
 // Chef Bounded Context
-//builder.Services.AddScoped<IChefRepository, ChefRepository>();
-//builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
-//builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
+builder.Services.AddScoped<IChefRepository, ChefRepository>();
+builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
+builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
 
 // Post Bounded Context
 builder.Services.AddScoped<IPostRepository, PostRepository>();
@@ -188,9 +192,15 @@ if (app.Environment.IsDevelopment())
 }
 
 // Apply CORS Policy
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAllPolicy");
+
 // Add Authorization Middleware to Pipeline
+app.UseRequestAuthorization();
+
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
