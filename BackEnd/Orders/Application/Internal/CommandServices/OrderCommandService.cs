@@ -51,30 +51,20 @@ public class OrderCommandService(IOrderRepository orderRepository,
         {
             order.deliveryDate = (DateTime)command.deliveryDate;
         }
+        
+        if (command.deliveryTime != null)
+        {
+            order.deliveryTime = command.deliveryTime;
+        }
 
         if (command.paymentMethod!=null)
         {
             order.paymentMethod = command.paymentMethod;
         }
 
-        if (command.totalAmount != null)
-        {
-            order.totalAmount = (double)command.totalAmount;
-        }
-
         if (command.status != null)
         {
             order.status = command.status;
-        }
-
-        if (command.dishes != null)
-        {
-            order.dishes = command.dishes;
-        }
-
-        if (command.detailsShown != null)
-        {
-            order.detailsShown = (bool)command.detailsShown;
         }
 
         try

@@ -2,7 +2,6 @@
 using BackEnd.Orders.Application.Internal.QueryServices;
 using BackEnd.Orders.Domain.Repositories;
 using BackEnd.Orders.Domain.Services;
-using BackEnd.Orders.Infrastructure.Repositories;
 using BackEnd.Shared.Domain.Repositories;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -16,21 +15,33 @@ using BackEnd.Posts.Application.Internal.QueryServices;
 using BackEnd.Posts.Domain.Repositories;
 using BackEnd.Posts.Domain.Services;
 using BackEnd.Posts.Infrastructure.Repositories;
-using BackEnd.Chefs.Application.Internal.CommandServices; // Agregado
-using BackEnd.Chefs.Application.Internal.QueryServices;   // Agregado
-using BackEnd.Chefs.Domain.Repositories;                  // Agregado
-using BackEnd.Chefs.Domain.Services;                     // Agregado
-using BackEnd.Chefs.Infrastructure.Repositories;
+//using BackEnd.Chefs.Application.Internal.CommandServices; // Agregado
+//using BackEnd.Chefs.Application.Internal.QueryServices;   // Agregado
+//using BackEnd.Chefs.Domain.Repositories;                  // Agregado
+//using BackEnd.Chefs.Domain.Services;                     // Agregado
+//using BackEnd.Chefs.Infrastructure.Repositories;
 using BackEnd.Dishes.Application.Internal.CommandService;
 using BackEnd.Dishes.Application.Internal.QueryServices;
 using BackEnd.Dishes.Domain.Repositories;
 using BackEnd.Dishes.Domain.services;
-using BackEnd.Dishes.Infrastructure.Persistence.EFC.Repositories; // Agregado
+using BackEnd.Dishes.Infrastructure.Persistence.EFC.Repositories;
+using BackEnd.Orders.Infrastructure.Persistence.EFC.Repositories; // Agregado
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Configurar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.AllowAnyOrigin() // URL del frontend
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 
 //configure Lower Case URLs
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -91,9 +102,9 @@ builder.Services.AddScoped<IDishQueryService, DishQueryService>();
 builder.Services.AddScoped<IDishCommandService, DishCommandService>();
 
 // Chef Bounded Context
-builder.Services.AddScoped<IChefRepository, ChefRepository>();
-builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
-builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
+//builder.Services.AddScoped<IChefRepository, ChefRepository>();
+//builder.Services.AddScoped<IChefQueryService, ChefQueryService>();
+//builder.Services.AddScoped<IChefCommandService, ChefCommandService>();
 
 // Post Bounded Context
 builder.Services.AddScoped<IPostRepository, PostRepository>();
@@ -118,6 +129,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

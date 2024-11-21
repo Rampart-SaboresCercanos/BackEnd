@@ -4,7 +4,7 @@ using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackEnd.Orders.Infrastructure.Repositories;
+namespace BackEnd.Orders.Infrastructure.Persistence.EFC.Repositories;
 
 public class OrderRepository(AppDbContext context): BaseRepository<Order>(context), IOrderRepository
 {
