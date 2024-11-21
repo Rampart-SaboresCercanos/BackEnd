@@ -23,7 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Chefs\Interfaces\ACL\" />
       <Folder Include="Orders\Infrastructure\Persistence\EFC\" />
     </ItemGroup>
 
