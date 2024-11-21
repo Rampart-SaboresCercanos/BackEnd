@@ -1,7 +1,6 @@
 ﻿namespace BackEnd.Chefs.Interfaces.REST.Resource;
 
-public record CreateChefResource
-(
+public record UpdateChefResource(
     string Name,
     string Gender,
     double Rating,

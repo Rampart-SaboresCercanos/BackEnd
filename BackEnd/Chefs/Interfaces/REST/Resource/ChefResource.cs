@@ -3,7 +3,7 @@
 public record ChefResource(
     int Id,
     string Name,
+    string Gender,
     double Rating,
-    bool IsFavorite,
-    string Gender
+    bool IsFavorite
 );

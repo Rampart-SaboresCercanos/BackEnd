@@ -5,31 +5,16 @@ using BackEnd.Chefs.Domain.Services;
 
 namespace BackEnd.Chefs.Application.Internal.QueryServices;
 
-public class ChefQueryService(IChefRepository chefRepository) : IChefQueryService
+public class ChefQueryService(IChefRepository chefRepository) 
+    : IChefQueryService
 {
     public async Task<IEnumerable<Chef>> Handle(GetAllChefsQuery query)
     {
-        return await chefRepository.FindAllAsync();
+        return await chefRepository.ListAsync();
     }
 
-    public async Task<Chef> Handle(GetChefByIdQuery query)
+    public async Task<Chef?> Handle(GetChefByIdQuery query)
     {
-        var chef = await chefRepository.FindByIdAsync(query.Id);
-        if (chef == null)
-        {
-            throw new Exception("Chef not found.");
-        }
-
-        return chef;
-    }
-
-    public async Task<IEnumerable<Chef>> Handle(GetChefsByNameQuery query)
-    {
-        return await chefRepository.FindByNameAsync(query.Name);
-    }
-
-    public async Task<IEnumerable<Chef>> Handle(GetChefsByRatingQuery query)
-    {
-        return await chefRepository.FindByRatingAsync(query.Rating);
+        return await chefRepository.FindByIdAsync(query.Id);
     }
 }

@@ -1,10 +1,9 @@
 ﻿namespace BackEnd.Chefs.Domain.Model.Command;
 
 public record UpdateChefCommand(
-    string? Name = null,
-    double? Rating = null,
-    bool? Favorite = null,
-    string? Gender = null)
-{
-    internal int ChefId { get; init; }
-}
+    int Id,                       // ID del chef a actualizar
+    string Name,                  // Nuevo nombre del chef
+    string Gender,                // Nuevo género del chef
+    double Rating,                 // Nuevo rating del chef
+    bool IsFavorite              // Nuevo estado de favorito
+);
