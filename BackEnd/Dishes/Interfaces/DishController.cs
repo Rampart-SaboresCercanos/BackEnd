@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace BackEnd.Dishes.Interfaces;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/dishes")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Create, read, update and delete dishes")]
 public class DishController(IDishQueryService dishQueryService,
