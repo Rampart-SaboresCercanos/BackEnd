@@ -19,5 +19,6 @@ public class Post
         dishId = command.dishId;
         publishDate = command.publishDate;
         stock = command.stock;
+        pricePerUnit = command.pricePerUnit;
     }
 }
