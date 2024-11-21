@@ -48,7 +48,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .IsRequired(); // La propiedad Name es obligatoria
         builder.Entity<Chef>().Property(c => c.Rating).HasColumnName("rating")
             .IsRequired(); // La propiedad Rating es obligatoria
-        builder.Entity<Chef>().Property(c => c.Favorite).HasColumnName("favorite")
+        builder.Entity<Chef>().Property(c => c.IsFavorite).HasColumnName("favorite")
             .IsRequired(); // La propiedad Favorite es obligatoria
         builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender")
             .IsRequired(); // La propiedad Gender es obligatoria
