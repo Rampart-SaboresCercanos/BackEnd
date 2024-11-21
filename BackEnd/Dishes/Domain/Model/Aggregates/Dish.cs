@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
-using Backend.Dishes.Domain.Model.Commands;
+using BackEnd.Dishes.Domain.Model.Commands;
 
-namespace Backend.Dishes.Domain.Model.Aggregates;
+namespace BackEnd.Dishes.Domain.Model.Aggregates;
 
 public partial class Dish
 {

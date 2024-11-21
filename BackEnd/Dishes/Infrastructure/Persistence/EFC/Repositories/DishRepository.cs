@@ -1,10 +1,10 @@
-﻿using Backend.Dishes.Domain.Model.Aggregates;
-using Backend.Dishes.Domain.Repositories;
+﻿using BackEnd.Dishes.Domain.Model.Aggregates;
+using BackEnd.Dishes.Domain.Repositories;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Dishes.Infrastructure.Persistence.EFC.Repositories;
+namespace BackEnd.Dishes.Infrastructure.Persistence.EFC.Repositories;
 
 public class DishRepository(AppDbContext context): BaseRepository<Dish>(context), IDishRepository
 {

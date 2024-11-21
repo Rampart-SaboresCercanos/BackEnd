@@ -1,4 +1,4 @@
-﻿namespace Backend.Dishes.Domain.Model.Commands;
+﻿namespace BackEnd.Dishes.Domain.Model.Commands;
 
 public record CreateDishCommand(
     int ChefId,                      // ID del chef

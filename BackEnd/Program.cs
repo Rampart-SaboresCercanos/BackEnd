@@ -21,11 +21,11 @@ using BackEnd.Chefs.Application.Internal.QueryServices;   // Agregado
 using BackEnd.Chefs.Domain.Repositories;                  // Agregado
 using BackEnd.Chefs.Domain.Services;                     // Agregado
 using BackEnd.Chefs.Infrastructure.Repositories;
-using Backend.Dishes.Application.Internal.CommandService;
-using Backend.Dishes.Application.Internal.QueryServices;
-using Backend.Dishes.Domain.Repositories;
-using Backend.Dishes.Domain.services;
-using Backend.Dishes.Infrastructure.Persistence.EFC.Repositories; // Agregado
+using BackEnd.Dishes.Application.Internal.CommandService;
+using BackEnd.Dishes.Application.Internal.QueryServices;
+using BackEnd.Dishes.Domain.Repositories;
+using BackEnd.Dishes.Domain.services;
+using BackEnd.Dishes.Infrastructure.Persistence.EFC.Repositories; // Agregado
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

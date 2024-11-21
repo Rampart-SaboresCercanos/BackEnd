@@ -1,7 +1,7 @@
-﻿using Backend.Dishes.Domain.Model.Aggregates;
-using Backend.Dishes.Interfaces.REST.Resources;
+﻿using BackEnd.Dishes.Domain.Model.Aggregates;
+using BackEnd.Dishes.Interfaces.REST.Resources;
 
-namespace Backend.Dishes.Interfaces.REST.Transform;
+namespace BackEnd.Dishes.Interfaces.REST.Transform;
 
 public class DishResourceFromEntityAssembler
 {

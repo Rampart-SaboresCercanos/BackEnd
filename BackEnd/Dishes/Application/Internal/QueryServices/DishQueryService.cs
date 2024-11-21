@@ -1,9 +1,9 @@
-﻿using Backend.Dishes.Domain.Model.Aggregates;
-using Backend.Dishes.Domain.Model.Queries;
-using Backend.Dishes.Domain.Repositories;
-using Backend.Dishes.Domain.services;
+﻿using BackEnd.Dishes.Domain.Model.Aggregates;
+using BackEnd.Dishes.Domain.Model.Queries;
+using BackEnd.Dishes.Domain.Repositories;
+using BackEnd.Dishes.Domain.services;
 
-namespace Backend.Dishes.Application.Internal.QueryServices;
+namespace BackEnd.Dishes.Application.Internal.QueryServices;
 
 public class DishQueryService(IDishRepository dishRepository)
     : IDishQueryService

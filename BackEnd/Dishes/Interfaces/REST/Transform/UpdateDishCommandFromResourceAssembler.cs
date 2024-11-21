@@ -1,7 +1,7 @@
-﻿using Backend.Dishes.Domain.Model.Commands;
-using Backend.Dishes.Interfaces.REST.Resources;
+﻿using BackEnd.Dishes.Domain.Model.Commands;
+using BackEnd.Dishes.Interfaces.REST.Resources;
 
-namespace Backend.Dishes.Interfaces.REST.Transform;
+namespace BackEnd.Dishes.Interfaces.REST.Transform;
 
 public class UpdateDishCommandFromResourceAssembler
 {

@@ -1,4 +1,4 @@
-﻿namespace Backend.Dishes.Interfaces.REST.Resources;
+﻿namespace BackEnd.Dishes.Interfaces.REST.Resources;
 
 public record CreateDishResource
 (

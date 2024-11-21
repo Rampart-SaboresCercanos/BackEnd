@@ -2,7 +2,7 @@
 using BackEnd.Orders.Domain.Model.Aggregates;
 using BackEnd.UserProfile;
 using BackEnd.Chefs.Domain.Model.Aggregates;
-using Backend.Dishes.Domain.Model.Aggregates;
+using BackEnd.Dishes.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using BackEnd.Posts.Domain.Model.Aggregates;
@@ -11,17 +11,15 @@ namespace BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        optionsBuilder.AddCreatedUpdatedInterceptor();
-        base.OnConfiguring(optionsBuilder);
+        builder.AddCreatedUpdatedInterceptor();
+        base.OnConfiguring(builder);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.UseSnakeCaseNamingConvention();
-
         // Configuración para Post
         builder.Entity<Post>().ToTable("posts");
         builder.Entity<Post>().HasKey(up => up.id);
@@ -86,12 +84,12 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasColumnType("TEXT") // Tipo para almacenar JSON
             .IsRequired(false); // Puede ser opcional
 
-        // Configuración para DishData
-        builder.Entity<Dish>().HasKey(f => f.Id);
-        builder.Entity<Dish>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Dish>().Property(f => f.ChefId).IsRequired();
-        builder.Entity<Dish>().Property(f => f.NameOfDish).IsRequired();
-        builder.Entity<Dish>().Property(f => f.Favorite).IsRequired();
+        // Bounded Context Dish (definicion de las tablas)
+        builder.Entity<Dish>().HasKey(f=> f.Id);
+        builder.Entity<Dish>().Property(f=> f.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Dish>().Property(f=> f.ChefId).IsRequired();
+        builder.Entity<Dish>().Property(f=> f.NameOfDish).IsRequired();
+        builder.Entity<Dish>().Property(f=> f.Favorite).IsRequired();   
         builder.Entity<Dish>().Property(f => f.Ingredients)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
@@ -103,5 +101,9 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
                 v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null))
             .IsRequired();
+        builder.Entity<Dish>().Property(f=> f.CreatedDate).IsRequired();        
+        builder.Entity<Dish>().Property(f=> f.UpdatedDate).IsRequired();
+        
+        builder.UseSnakeCaseNamingConvention();
     }
 }

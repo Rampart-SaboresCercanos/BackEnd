@@ -1,10 +1,10 @@
-﻿using Backend.Dishes.Domain.Model.Aggregates;
-using Backend.Dishes.Domain.Model.Commands;
-using Backend.Dishes.Domain.Repositories;
-using Backend.Dishes.Domain.services;
+﻿using BackEnd.Dishes.Domain.Model.Aggregates;
+using BackEnd.Dishes.Domain.Model.Commands;
+using BackEnd.Dishes.Domain.Repositories;
+using BackEnd.Dishes.Domain.services;
 using BackEnd.Shared.Domain.Repositories;
 
-namespace Backend.Dishes.Application.Internal.CommandService;
+namespace BackEnd.Dishes.Application.Internal.CommandService;
 
 public class DishCommandService(IDishRepository dishRepository, IUnitOfWork unitOfWork)
     : IDishCommandService

@@ -1,7 +1,7 @@
-﻿using Backend.Dishes.Domain.Model.Aggregates;
-using Backend.Dishes.Domain.Model.Queries;
+﻿using BackEnd.Dishes.Domain.Model.Aggregates;
+using BackEnd.Dishes.Domain.Model.Queries;
 
-namespace Backend.Dishes.Domain.services;
+namespace BackEnd.Dishes.Domain.services;
 
 public interface IDishQueryService 
 {
