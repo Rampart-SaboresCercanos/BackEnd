@@ -7,7 +7,7 @@ using BackEnd.Dishes.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BackEnd.Dishes.Interfaces;
+namespace BackEnd.Dishes.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/dishes")]

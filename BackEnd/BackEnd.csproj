@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="EntityFrameworkCore.CreatedUpdatedDate" Version="8.0.0" />
         <PackageReference Include="Humanizer" Version="2.14.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8"/>
@@ -17,9 +18,11 @@
         <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.8" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.9.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Chefs\Interfaces\ACL\" />
       <Folder Include="Orders\Infrastructure\Persistence\EFC\" />
     </ItemGroup>
 

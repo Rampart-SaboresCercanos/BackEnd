@@ -12,15 +12,9 @@ public class ChefQueryService(IChefRepository chefRepository) : IChefQueryServic
         return await chefRepository.FindAllAsync();
     }
 
-    public async Task<Chef> Handle(GetChefByIdQuery query)
+    public async Task<Chef?> Handle(GetChefByIdQuery query)
     {
-        var chef = await chefRepository.FindByIdAsync(query.Id);
-        if (chef == null)
-        {
-            throw new Exception("Chef not found.");
-        }
-
-        return chef;
+        return await chefRepository.FindByIdAsync(query.Id);
     }
 
     public async Task<IEnumerable<Chef>> Handle(GetChefsByNameQuery query)

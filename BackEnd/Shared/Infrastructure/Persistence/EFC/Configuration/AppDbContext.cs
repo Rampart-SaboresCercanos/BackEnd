@@ -1,8 +1,9 @@
 ﻿using System.Text.Json;
+using BackEnd.Chefs.Domain.Model.Aggregates;
 using BackEnd.Orders.Domain.Model.Aggregates;
 using BackEnd.UserProfile;
-//using BackEnd.Chefs.Domain.Model.Aggregates;
 using BackEnd.Dishes.Domain.Model.Aggregates;
+using BackEnd.IAM.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using BackEnd.Posts.Domain.Model.Aggregates;
@@ -38,21 +39,17 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Order>().Property(o => o.status).IsRequired().HasColumnName("status");
 
         // Configuración para Chef
-        //builder.Entity<Chef>().ToTable("chefs"); // Especifica el nombre de la tabla
-        //builder.Entity<Chef>().HasKey(c => c.Id); // Define la clave primaria
-        //builder.Entity<Chef>().Property(c => c.Id).IsRequired(); // La propiedad Id es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Name).HasColumnName("name")
-        //    .IsRequired(); // La propiedad Name es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Rating).HasColumnName("rating")
-        //    .IsRequired(); // La propiedad Rating es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Favorite).HasColumnName("favorite")
-        //    .IsRequired(); // La propiedad Favorite es obligatoria
-        //builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender")
-        //    .IsRequired(); // La propiedad Gender es obligatoria
-
-        
-
-        
+        builder.Entity<Chef>().ToTable("chefs"); // Especifica el nombre de la tabla
+        builder.Entity<Chef>().HasKey(c => c.Id); // Define la clave primaria
+        builder.Entity<Chef>().Property(c => c.Id).IsRequired(); // La propiedad Id es obligatoria
+        builder.Entity<Chef>().Property(c => c.Name).HasColumnName("name")
+            .IsRequired(); // La propiedad Name es obligatoria
+        builder.Entity<Chef>().Property(c => c.Rating).HasColumnName("rating")
+            .IsRequired(); // La propiedad Rating es obligatoria
+        builder.Entity<Chef>().Property(c => c.Favorite).HasColumnName("favorite")
+            .IsRequired(); // La propiedad Favorite es obligatoria
+        builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender")
+            .IsRequired(); // La propiedad Gender es obligatoria
 
         // Configuración para UserProfile
         builder.Entity<ProfileData>().ToTable("user_profiles"); // Especifica el nombre de la tabla
@@ -96,6 +93,13 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .IsRequired();
         builder.Entity<Dish>().Property(f=> f.CreatedDate).IsRequired();        
         builder.Entity<Dish>().Property(f=> f.UpdatedDate).IsRequired();
+        
+        // IAM Context
+
+        builder.Entity<User>().HasKey(u => u.Id);
+        builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(u => u.Username).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         
         builder.UseSnakeCaseNamingConvention();
     }

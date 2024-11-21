@@ -12,7 +12,6 @@ public class DishQueryService(IDishRepository dishRepository)
     {
         return await dishRepository.ListAsync();
     }
-
     public async Task<Dish?> Handle(GetDishByIdQuery query)
     {
         return await dishRepository.FindByIdAsync(query.Id);
