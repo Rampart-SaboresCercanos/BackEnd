@@ -1,13 +1,13 @@
 ﻿using System.Net.Mime;
-using Backend.Dishes.Domain.Model.Commands;
-using Backend.Dishes.Domain.Model.Queries;
-using Backend.Dishes.Domain.services;
-using Backend.Dishes.Interfaces.REST.Resources;
-using Backend.Dishes.Interfaces.REST.Transform;
+using BackEnd.Dishes.Domain.Model.Commands;
+using BackEnd.Dishes.Domain.Model.Queries;
+using BackEnd.Dishes.Domain.services;
+using BackEnd.Dishes.Interfaces.REST.Resources;
+using BackEnd.Dishes.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Backend.Dishes.Interfaces;
+namespace BackEnd.Dishes.Interfaces;
 
 [ApiController]
 [Route("api/v1/[controller]")]

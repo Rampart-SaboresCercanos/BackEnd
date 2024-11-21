@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using EntityFrameworkCore.CreatedUpdatedDate.Contracts;
 
-namespace Backend.Dishes.Domain.Model.Aggregates;
+namespace BackEnd.Dishes.Domain.Model.Aggregates;
 
 public partial class  Dish : IEntityWithCreatedUpdatedDate
 {
