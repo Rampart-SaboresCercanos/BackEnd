@@ -4,9 +4,7 @@ public record CreateOrderCommand(
     int customerId,
     DateTime orderDate,
     DateTime deliveryDate,
+    string deliveryTime,
     string paymentMethod,
-    double totalAmount,
-    string status,
-    List<string> dishes,
-    bool detailsShown
+    string status
     );
