@@ -4,21 +4,22 @@ namespace BackEnd.Orders.Interfaces.REST.Transform.Transform;
 
 public static class OrderResourceFromEntityAssembler
 {
+    //Crear un objeto para la tabla ->Tabla ORDERS
+    //ES lo que se muestra en el response
     public static OrderResource ToResourceFromEntity(Order entity)
     {
         // Asegúrate de que entity.Preferences sea de tipo List<UserPreference>
-        var dishes = entity.dishes; // No es necesario convertir, ya es List<string>
+       
 
         return new OrderResource(
             entity.Id,
             entity.customerId,
             entity.orderDate,
             entity.deliveryDate,
+            entity.deliveryTime,
             entity.paymentMethod,
-            entity.totalAmount,
-            entity.status,
-            dishes,
-            entity.detailsShown
+            entity.status
+            
         );
     }
 }
