@@ -10,10 +10,6 @@ using BackEnd.Orders.Domain.Services;
 using BackEnd.Shared.Domain.Repositories;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Configuration;
 using BackEnd.Shared.Infrastructure.Persistence.EFC.Repositories;
-using BackEnd.UserProfile;
-using BackEnd.UserProfile.Application.Internal.QueryServices;
-using BackEnd.UserProfile.Application.Internal.CommandServices;
-using BackEnd.UserProfile.Domain.Services;
 using BackEnd.Posts.Application.Internal.CommandServices;
 using BackEnd.Posts.Application.Internal.QueryServices;
 using BackEnd.Posts.Domain.Repositories;
@@ -139,11 +135,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
 builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
-
-// UserProfile Bounded Context
-builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-builder.Services.AddScoped<IUserProfileQueryService, UserProfileQueryService>();
-builder.Services.AddScoped<IUserProfileCommandService, UserProfileCommandService>();
 
 // Dish Bounded Context
 builder.Services.AddScoped<IDishRepository, DishRepository>();

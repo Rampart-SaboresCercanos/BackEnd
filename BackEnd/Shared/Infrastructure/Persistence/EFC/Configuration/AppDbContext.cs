@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using BackEnd.Chefs.Domain.Model.Aggregates;
 using BackEnd.Orders.Domain.Model.Aggregates;
-using BackEnd.UserProfile;
 using BackEnd.Dishes.Domain.Model.Aggregates;
 using BackEnd.IAM.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
@@ -53,29 +52,6 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .IsRequired(); // La propiedad Favorite es obligatoria
         builder.Entity<Chef>().Property(c => c.Gender).HasColumnName("gender")
             .IsRequired(); // La propiedad Gender es obligatoria
-
-        // Configuración para UserProfile
-        builder.Entity<ProfileData>().ToTable("user_profiles"); // Especifica el nombre de la tabla
-        builder.Entity<ProfileData>().HasKey(up => up.Id);
-        builder.Entity<ProfileData>().Property(up => up.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<ProfileData>().Property(up => up.Photo).IsRequired().HasColumnName("photo");
-        builder.Entity<ProfileData>().Property(up => up.Name).IsRequired().HasColumnName("name");
-        builder.Entity<ProfileData>().Property(up => up.Email).IsRequired().HasColumnName("email");
-        builder.Entity<ProfileData>().Property(up => up.BirthDate).HasColumnName("birth_date").IsRequired();
-        builder.Entity<ProfileData>().Property(up => up.Address).IsRequired().HasColumnName("address");
-        builder.Entity<ProfileData>().Property(up => up.PaymentMethod).IsRequired().HasColumnName("paymentmethod");
-        builder.Entity<ProfileData>().Property(up => up.CardNumber).HasColumnName("cardnumber").IsRequired();
-        builder.Entity<ProfileData>().Property(up => up.YapeNumber).HasColumnName("yapenumber").IsRequired();
-        builder.Entity<ProfileData>().Property(up => up.CashPayment).IsRequired().HasColumnName("cashpayment");
-
-        // Ignorar la propiedad Preferences
-        builder.Entity<ProfileData>().Ignore(up => up.Preferences);
-
-        builder.Entity<ProfileData>()
-            .Property(up => up.PreferencesJson)
-            .HasColumnName("preferencesJson") // Asegúrate de que coincida con el nombre de la columna
-            .HasColumnType("TEXT") // Tipo para almacenar JSON
-            .IsRequired(false); // Puede ser opcional
 
         // Bounded Context Dish (definicion de las tablas)
         builder.Entity<Dish>().HasKey(f=> f.Id);
